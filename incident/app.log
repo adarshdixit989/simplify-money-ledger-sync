@@ -1,0 +1,5 @@
+2026-09-10T22:14:51+05:30 INFO ingest.IngestService batch=b-20260910-2214 device=dev-3f1a90c47b21 messages=522
+2026-09-10T22:14:51+05:30 DEBUG parse.Amounts msg=m-00004-9c11ae body_head="Rs.5 debited from a/c **4821 on 04-07-26 at 07:19 to UPI/WATER CAN. Avl Bal: Rs.92,213.10."
+2026-09-10T22:14:51+05:30 DEBUG parse.Amounts msg=m-00004-9c11ae amount_extracted=92213.10
+2026-09-10T22:14:51+05:30 INFO store.SqlLedgerStore msg=m-00004-9c11ae saved acct=4821 dir=DEBIT amount=92213.10 merchant="UPI/WATER CAN"
+2026-09-11T03:14:06+05:30 ERROR report.BalanceMonitor account=4821 ledger_derived=-1213003.85 bank_stated=41126.34 divergence=-1254130.19
