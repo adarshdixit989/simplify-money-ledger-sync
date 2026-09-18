@@ -1,0 +1,5 @@
+What broke: the amount parser skipped whole-rupee transaction amounts and could capture a later available balance as the transaction amount.
+How we found it: reproducing the water-can SMS showed Amounts.first() returning 92,213.10 instead of the bank's Rs.5.
+Who was affected: the corpus contains multiple whole-rupee transaction shapes; the production incident was the HDFC water-can alert on account 4821.
+Why it happened: the original amount regex required a decimal point, so whole-rupee transaction amounts were invisible to first-match extraction.
+Why it cannot recur: amount extraction now accepts whole-rupee values and regression tests cover the production shape.
