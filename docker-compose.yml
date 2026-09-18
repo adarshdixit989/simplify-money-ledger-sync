@@ -1,0 +1,16 @@
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: ledger-sync-mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - ledger-sync-mongo-data:/data/db
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --quiet --eval 'db.adminCommand({ ping: 1 }).ok' localhost:27017/test | grep 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+volumes:
+  ledger-sync-mongo-data:
