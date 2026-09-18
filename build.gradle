@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'in.simplifymoney'
+version = '0.1.0'
+
+java {
+    toolchain { languageVersion = JavaLanguageVersion.of(21) }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    runtimeOnly 'com.h2database:h2:2.2.224'
+    implementation 'org.mongodb:mongodb-driver-sync:5.1.4'
+    testImplementation platform('org.junit:junit-bom:5.10.2')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+application { mainClass = 'in.simplifymoney.ledgersync.App' }
+test { useJUnitPlatform() }
+
+tasks.register('selfCheck', JavaExec) {
+    group = 'verification'
+    mainClass = 'in.simplifymoney.ledgersync.SelfCheck'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+tasks.register('benchmark', JavaExec) {
+    group = 'verification'
+    mainClass = 'in.simplifymoney.ledgersync.store.DocumentStoreBenchmark'
+    classpath = sourceSets.main.runtimeClasspath
+}
