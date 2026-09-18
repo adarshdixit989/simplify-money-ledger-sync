@@ -1,7 +1,7 @@
 services:
   mongo:
     image: mongo:7.0
-    container_name: ledger-sync-mongo
+    container_name: mongodb
     restart: unless-stopped
     ports:
       - "27017:27017"
